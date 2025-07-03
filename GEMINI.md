@@ -8,7 +8,20 @@ Our strategy is to incrementally build and deploy the application's components, 
 
 ---
 
-### **Step 1: Deploy the Live Backend Server**
+### **Step 1: Deploy the Static UI**
+
+-   **Status:** ✅ Complete
+-   **Goal:** Deploy a visually appealing and functional "Coming Soon" page.
+-   **Actions:**
+    1.  Configured `render.yaml` to deploy a **Static Site**.
+    2.  Cloned the UI from the `comingsoonsite` repository.
+    3.  Copied all necessary HTML, CSS, JavaScript, and image assets.
+    4.  Created placeholder legal documents.
+-   **Verification:** The new UI is live and accessible.
+
+---
+
+### **Step 2: Deploy the Live Backend Server**
 
 -   **Status:** ⏳ In Progress
 -   **Goal:** Get the core Node.js/Express backend running on Render. This will serve as the foundation for all other features.
@@ -21,10 +34,10 @@ Our strategy is to incrementally build and deploy the application's components, 
 
 ---
 
-### **Step 2: Integrate the React Frontend**
+### **Step 3: Integrate the React Frontend**
 
 -   **Status:** ⏸️ Pending
--   **Goal:** Replace the temporary "Coming Soon" page with the actual, dynamic React application, and connect it to the live backend.
+-   **Goal:** Replace the static HTML/CSS with the actual, dynamic React application, and connect it to the live backend.
 -   **Actions:**
     1.  Update the `render.yaml` build command to build the Next.js application.
     2.  Configure the Express server (`index.ts`) to serve the built Next.js application.
@@ -32,7 +45,7 @@ Our strategy is to incrementally build and deploy the application's components, 
 
 ---
 
-### **Step 3: Connect the Database & Authentication**
+### **Step 4: Connect the Database & Authentication**
 
 -   **Status:** ⏸️ Pending
 -   **Goal:** Activate the user system by connecting to the Supabase database and enabling signup and login.
@@ -43,7 +56,7 @@ Our strategy is to incrementally build and deploy the application's components, 
 
 ---
 
-### **Step 4: Enable Core AI Features**
+### **Step 5: Enable Core AI Features**
 
 -   **Status:** ⏸️ Pending
 -   **Goal:** Bring the main "text-to-app" generation feature online.

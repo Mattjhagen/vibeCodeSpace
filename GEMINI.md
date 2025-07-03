@@ -1,107 +1,52 @@
-# VibeCode Project Catalog
+## 7. Deployment Progress
 
-This document provides a comprehensive overview of the VibeCode project, its architecture, features, and operational procedures.
+This section tracks the step-by-step deployment of the VibeCode application to production.
 
-## 1. Project Overview
+### **Deployment Action Plan: VibeCode**
 
-**VibeCode** is an AI-powered platform designed to generate complete, unique, and deployable web applications from natural language prompts. It aims to bridge the gap between idea and implementation, allowing both developers and non-technical users to create and launch web applications with ease.
+Our strategy is to incrementally build and deploy the application's components, ensuring each part is working before adding the next layer of complexity.
 
-### Core Features:
+---
 
-- **AI-Powered Application Generation:** Utilizes models from OpenAI, Anthropic, and Gemini to generate full-stack applications.
-- **Dynamic Deployment:** Automatically deploys the generated applications to Render.
-- **Freemium Model:** Implements a usage-based subscription model with different tiers (Free, Pro).
-- **Authentication:** Provides a complete authentication system (signup, signin, social login, password reset) using Supabase.
-- **Payments:** Integrates with Stripe for handling subscriptions and payments.
-- **Resume-to-Portfolio:** A specific feature to automatically generate a portfolio website from a user's resume.
+### **Step 1: Deploy the Live Backend Server**
 
-## 2. Architecture
+-   **Status:** ⏳ In Progress
+-   **Goal:** Get the core Node.js/Express backend running on Render. This will serve as the foundation for all other features.
+-   **Actions:**
+    1.  Reconfigure `render.yaml` to deploy a **Web Service**.
+    2.  Set the build command to install dependencies and run the `build:backend` script.
+    3.  Set the start command to `node dist/index.js`.
+    4.  Add necessary placeholder environment variables in the Render dashboard.
+-   **Verification:** The deployment will be successful when we can access a basic health-check endpoint on the live server URL.
 
-VibeCode is a monorepo with a modern full-stack architecture:
+---
 
-- **Frontend:** A Next.js application serves the user interface. It includes components for user interaction, such as the prompt interface and subscription management.
-- **Backend:** A Node.js/Express server provides the API for the frontend. It handles user authentication, application generation logic, and payment processing.
-- **Database:** A PostgreSQL database, managed via Supabase, stores user data, generated site information, and subscription details. Drizzle is used as the ORM.
-- **AI Orchestration:** A central module in the backend (`aiOrchestrator.js`) manages the interaction with various AI providers to generate application code.
-- **Deployment:** The `deployer.js` module automates the process of creating a GitHub repository and deploying the generated application to Render.
+### **Step 2: Integrate the React Frontend**
 
-## 3. Directory Structure
+-   **Status:** ⏸️ Pending
+-   **Goal:** Replace the temporary "Coming Soon" page with the actual, dynamic React application, and connect it to the live backend.
+-   **Actions:**
+    1.  Update the `render.yaml` build command to build the Next.js application.
+    2.  Configure the Express server (`index.ts`) to serve the built Next.js application.
+-   **Verification:** The VibeCode landing page and UI will be live and accessible.
 
-The project is organized into the following key directories:
+---
 
-```
-vibeCodeSpace_clone/
-├── frontend/         # Next.js frontend application
-├── backend/          # Node.js/Express backend API
-│   ├── src/
-│   │   ├── lib/      # Core logic (AI clients, orchestrator, deployer)
-│   │   ├── middleware/ # Express middleware (auth, usage tracking)
-│   │   └── routes/   # API routes
-│   └── migrations/   # Database migrations
-├── common/           # Shared types and interfaces
-├── client/           # React client application (Vite)
-├── pages/            # Next.js pages (likely for API routes)
-├── components/       # Shared React components
-└── ...
-```
+### **Step 3: Connect the Database & Authentication**
 
-## 4. Getting Started
+-   **Status:** ⏸️ Pending
+-   **Goal:** Activate the user system by connecting to the Supabase database and enabling signup and login.
+-   **Actions:**
+    1.  Configure production Supabase credentials in the Render dashboard.
+    2.  Run database migrations.
+-   **Verification:** Users will be able to sign up, log in, and log out.
 
-### Prerequisites:
+---
 
-- Node.js (v18 or later)
-- npm or yarn
-- Supabase Account
-- Render Account
-- GitHub Account
+### **Step 4: Enable Core AI Features**
 
-### Installation & Setup:
-
-1.  **Clone the repository.**
-2.  **Install dependencies** for both the `frontend` and `backend` directories using `npm install`.
-3.  **Set up environment variables:** Create a `.env` file in the `backend` directory by copying `.env.example` and fill in the necessary API keys and credentials for Supabase, Render, GitHub, and AI providers.
-
-### Running the Application:
-
-1.  **Start the backend server:**
-    ```bash
-    cd backend
-    npm run dev
-    ```
-2.  **Start the frontend server:**
-    ```bash
-    cd ../frontend
-    npm run dev
-    ```
-3.  Access the application at `http://localhost:3000`.
-
-## 5. Available Scripts
-
-The following scripts are available in the respective `package.json` files:
-
-### Backend (`backend/package.json`):
-
-- `npm start`: Starts the production server.
-- `npm run dev`: Starts the development server with `nodemon`.
-- `npm test`: Runs tests using Jest.
-
-### Frontend (`frontend/package.json`):
-
-- `npm run dev`: Starts the Next.js development server.
-- `npm run build`: Builds the Next.js application for production.
-- `npm start`: Starts the Next.js production server.
-- `npm run lint`: Lints the frontend code.
-
-## 6. Core Implementation Details
-
-### AI Orchestration
-
-The `aiOrchestrator.js` module is the core of the application generation logic. It takes a user prompt, communicates with an AI model (e.g., GPT-4o) to refine requirements, and generates a structured JSON object containing the application code.
-
-### Dynamic Deployment
-
-The `deployer.js` module automates the deployment process. It creates a new private GitHub repository, pushes the generated code, and then uses the Render API to create and deploy the new application.
-
-### Freemium Model
-
-The freemium model is implemented using a combination of a Supabase database and backend middleware. The `profiles` table tracks user plans and usage, and the `checkUsage` middleware protects the generation endpoint from overuse.
+-   **Status:** ⏸️ Pending
+-   **Goal:** Bring the main "text-to-app" generation feature online.
+-   **Actions:**
+    1.  Add AI provider API keys to the Render environment.
+-   **Verification:** A logged-in user can successfully generate an application from a prompt.

@@ -12,7 +12,7 @@ jobs:
       - name: Curl Render App
         run: |
           # Replace with your actual Render URL
-          APP_URL="${{ secrets.APP_URL || 'https://vibecode-app.onrender.com' }}"
+          APP_URL="${{ secrets.APP_URL || 'https://portfolio-vibecode.onrender.com' }}"
           
           echo "Pinging $APP_URL to keep alive..."
           
